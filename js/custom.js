@@ -33,56 +33,86 @@ $(".client_owl-carousel").owlCarousel({
 });
 
 
-function validateForm() {
-            let valid = true;
+document.getElementById('name').addEventListener('input', function () {
+    const name = this.value;
+    const nameError = document.getElementById('username_error');
+    const namepattern = /^[a-zA-Z]+(?: [a-zA-Z]+)*$/;
+    if (!namepattern.test(name) || name.length < 3) {
+        nameError.textContent = 'Please enter a valid name.';
+        this.classList.add('error');
+    } else {
+        nameError.textContent = '';
+        this.classList.remove('error');
+    }
+});
 
-            const name = document.getElementById('name').value.trim();
-            const nameError = document.getElementById('username_error');
-            const namepattern =/^[a-zA-Z]+(?: [a-zA-Z]+)*$/;
-            if (!namepattern.test(name)) {
-                nameError.textContent = 'Please enter a valid name.';
-                valid = false;
-            } else {
-                nameError.textContent = '';
-            }
 
-            const phone = document.getElementById('phone').value.trim();
-            const phoneError = document.getElementById('phone_error');
-            const phonePattern = /^[0-9]{10}$/;
-            if (!phonePattern.test(phone)) {
-                phoneError.textContent = 'Please enter a valid 10-digit phone number.';
-                valid = false;
-            } else {
-                phoneError.textContent = '';
-            }
+document.getElementById('phone').addEventListener('input', function () {
 
-            const email = document.getElementById('email').value.trim();
-            const emailError = document.getElementById('email_error');
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailPattern.test(email)) {
-                emailError.textContent = 'Please enter a valid email address.';
-                valid = false;
-            } else {
-                emailError.textContent = '';
-            }
+    const phone = this.value;
+    const phoneError = document.getElementById('phone_error');
+    const phonePattern = /^[0-9]{10}$/;
+    if (!phonePattern.test(phone)) {
+        phoneError.textContent = 'Please enter a valid 10-digit phone number.';
+        this.classList.add('error');
+    } else {
+        phoneError.textContent = '';
+        this.classList.remove('error');
+    }
 
-            const persons = document.getElementById('persons').value;
-            const personsError = document.getElementById('persons_error');
-            if (!persons) {
-                personsError.textContent = 'Please select the number of persons.';
-                valid = false;
-            } else {
-                personsError.textContent = '';
-            }
+});
 
-            const date = document.getElementById('date').value;
-            const dateError = document.getElementById('date_error');
-            if (!date) {
-                dateError.textContent = 'Please select a date.';
-                valid = false;
-            } else {
-                dateError.textContent = '';
-            }
+document.getElementById('email').addEventListener('input', function () {
+    const email = this.value;
+    const emailError = document.getElementById('email_error');
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+        emailError.textContent = 'Please enter a valid email address.';
+        this.classList.add('error');
+    } else {
+        emailError.textContent = '';
+        this.classList.remove('error');
+    }
 
-            return valid;
-        }
+});
+
+document.getElementById('persons').addEventListener('change', function () {
+
+    const persons = this.value;
+    const personsError = document.getElementById('persons_error');
+    if (!persons) {
+        personsError.textContent = 'Please select the number of persons.';
+        this.classList.add('error');
+    } else {
+        personsError.textContent = '';
+        this.classList.remove('error');
+    }
+});
+
+document.getElementById('date').addEventListener('input', function (event) {
+    const date = this.value;
+
+    const currentDate = new Date().toISOString().split('T')[0];
+    if (!date || date < currentDate) {
+        event.preventDefault();
+        const dateError = document.getElementById('date_error');
+        dateError.textContent = 'Please select a date.';
+        this.classList.add('error');
+    } else {
+        dateError.textContent = '';
+        this.classList.remove('error');
+    }
+});
+
+document.getElementById('registrationForm').addEventListener('submit', function (event) {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const date = document.getElementById('date').value;
+    const persons = document.getElementById('persons').value;
+
+    if (/^[a-zA-Z]+(?: [a-zA-Z]+)*$/.test(name) || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || /^[0-9]{10}$/.test(phone) || !persons || !date) {
+        event.preventDefault();
+        alert("Please enter true credentials");
+    }
+});
