@@ -106,7 +106,7 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form_container">
-              <form action="" onsubmit="return validateform()">
+              <form action="" onsubmit="return validateForm()">
                 <div>
                   <input
                     id="name"
@@ -135,21 +135,23 @@
                   <span class="error" id="email_error"></span>
                 </div>
                 <div>
-                  <select class="form-control nice-select wide">
+                  <select id="persons" class="form-control nice-select wide">
                     <option value="" disabled selected>
                       How many persons?
                     </option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                    <option value="">4</option>
-                    <option value="">5</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
                   </select>
+                  <span class="error" id="persons_error"></span>
                 </div>
                 <div>
-                  <input type="date" class="form-control" />
+                  <input type="date" id="date" class="form-control" />
+                  <span class="error" id="date_error"></span>
                 </div>
                 <div class="btn_box">
-                  <button>Book Now</button>
+                  <button type="submit">Book Now</button>
                 </div>
               </form>
             </div>

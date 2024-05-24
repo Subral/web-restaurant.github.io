@@ -33,46 +33,56 @@ $(".client_owl-carousel").owlCarousel({
 });
 
 
-
- function validateform() {
+function validateForm() {
             let valid = true;
 
             const name = document.getElementById('name').value.trim();
             const nameError = document.getElementById('username_error');
-            if (name.length < 2) {
-                nameError.textContent = 'Name must be at least 2 characters long.';
+            const namepattern = /[a-zA-Z][a-zA-Z ]+/;
+            if (!namepattern.test(name)) {
+                nameError.textContent = 'Please enter a valid name.';
                 valid = false;
-            } 
+            } else {
+                nameError.textContent = '';
+            }
 
-            
+            const phone = document.getElementById('phone').value.trim();
             const phoneError = document.getElementById('phone_error');
             const phonePattern = /^[0-9]{10}$/;
             if (!phonePattern.test(phone)) {
                 phoneError.textContent = 'Please enter a valid 10-digit phone number.';
                 valid = false;
-            } 
+            } else {
+                phoneError.textContent = '';
+            }
 
             const email = document.getElementById('email').value.trim();
             const emailError = document.getElementById('email_error');
-            const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,6}$/;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailPattern.test(email)) {
                 emailError.textContent = 'Please enter a valid email address.';
                 valid = false;
-            } 
+            } else {
+                emailError.textContent = '';
+            }
 
             const persons = document.getElementById('persons').value;
             const personsError = document.getElementById('persons_error');
             if (!persons) {
                 personsError.textContent = 'Please select the number of persons.';
                 valid = false;
-            } 
+            } else {
+                personsError.textContent = '';
+            }
 
             const date = document.getElementById('date').value;
             const dateError = document.getElementById('date_error');
             if (!date) {
                 dateError.textContent = 'Please select a date.';
                 valid = false;
-            } 
+            } else {
+                dateError.textContent = '';
+            }
 
             return valid;
         }
