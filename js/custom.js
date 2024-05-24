@@ -31,3 +31,48 @@ $(".client_owl-carousel").owlCarousel({
         }
     }
 });
+
+
+
+ function validateform() {
+            let valid = true;
+
+            const name = document.getElementById('name').value.trim();
+            const nameError = document.getElementById('username_error');
+            if (name.length < 2) {
+                nameError.textContent = 'Name must be at least 2 characters long.';
+                valid = false;
+            } 
+
+            
+            const phoneError = document.getElementById('phone_error');
+            const phonePattern = /^[0-9]{10}$/;
+            if (!phonePattern.test(phone)) {
+                phoneError.textContent = 'Please enter a valid 10-digit phone number.';
+                valid = false;
+            } 
+
+            const email = document.getElementById('email').value.trim();
+            const emailError = document.getElementById('email_error');
+            const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,6}$/;
+            if (!emailPattern.test(email)) {
+                emailError.textContent = 'Please enter a valid email address.';
+                valid = false;
+            } 
+
+            const persons = document.getElementById('persons').value;
+            const personsError = document.getElementById('persons_error');
+            if (!persons) {
+                personsError.textContent = 'Please select the number of persons.';
+                valid = false;
+            } 
+
+            const date = document.getElementById('date').value;
+            const dateError = document.getElementById('date_error');
+            if (!date) {
+                dateError.textContent = 'Please select a date.';
+                valid = false;
+            } 
+
+            return valid;
+        }
