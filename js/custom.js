@@ -38,7 +38,7 @@ function validateForm() {
 
             const name = document.getElementById('name').value.trim();
             const nameError = document.getElementById('username_error');
-            const namepattern = /[a-zA-Z][a-zA-Z ]+/;
+            const namepattern =/^[a-zA-Z]+(?: [a-zA-Z]+)*$/;
             if (!namepattern.test(name)) {
                 nameError.textContent = 'Please enter a valid name.';
                 valid = false;
