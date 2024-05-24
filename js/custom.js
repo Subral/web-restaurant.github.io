@@ -89,14 +89,13 @@ document.getElementById('persons').addEventListener('change', function () {
     }
 });
 
-document.getElementById('date').addEventListener('input', function (event) {
+document.getElementById('date').addEventListener('input', function () {
     const date = this.value;
-
+    const dateError = document.getElementById('date_error');
     const currentDate = new Date().toISOString().split('T')[0];
+
     if (!date || date < currentDate) {
-        event.preventDefault();
-        const dateError = document.getElementById('date_error');
-        dateError.textContent = 'Please select a date.';
+        dateError.textContent = 'Please select a valid date.';
         this.classList.add('error');
     } else {
         dateError.textContent = '';
@@ -111,8 +110,17 @@ document.getElementById('registrationForm').addEventListener('submit', function 
     const date = document.getElementById('date').value;
     const persons = document.getElementById('persons').value;
 
-    if (/^[a-zA-Z]+(?: [a-zA-Z]+)*$/.test(name) || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || /^[0-9]{10}$/.test(phone) || !persons || !date) {
+    const namePattern = /^[a-zA-Z]+(?: [a-zA-Z]+)*$/;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phonePattern = /^[0-9]{10}$/;
+    const currentDate = new Date().toISOString().split('T')[0];
+    if (!namePattern.test(name) || name.length < 3 ||
+        !emailPattern.test(email) ||
+        !phonePattern.test(phone) ||
+        !persons ||
+        !date || date < currentDate) {
+
         event.preventDefault();
-        alert("Please enter true credentials");
+        alert("Please enter valid credentials.");
     }
 });
